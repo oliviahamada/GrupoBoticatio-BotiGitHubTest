@@ -1,0 +1,98 @@
+﻿@using GrupoBoticario.Models;
+
+@{
+    if (ViewBag.Data != null)
+    {
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item @(ViewBag.Data.page <= 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Edit", "Repository", new {id = ViewBag.Data.language, page = ViewBag.Data.page-1} )" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @{
+                    int p = 1;
+                    while (p <= 10)
+                    {
+                        <li class="page-item @(ViewBag.Data.page == p ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Edit", "Repository", new {id = ViewBag.Data.language, page = p} )">
+                                <span aria-hidden="true">@p</span>
+                            </a>
+                        </li>
+                        p++;
+                    }
+
+                }
+                <li class="page-item @(ViewBag.Data.page >= 10 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Edit", "Repository", new {id = ViewBag.Data.language, page = ViewBag.Data.page+1} )" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Repositório</th>
+                    <th>Estrelas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in ViewBag.Data.repositoryItem)
+                {
+                    <tr>
+                        <td>
+                        <a href="@Url.Action("Index", "RepositoryItem", new {language = @i.language, Id = @i.Id} )">
+                            <span aria-hidden="true">@i.fullName</span>
+                        </a></td>
+                        <td>@i.stargazersCount</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    }else
+    {
+        <table class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Repositório</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>Nenhum registro encontrado</td>
+                    </tr>
+            </tbody>
+        </table>
+    }
+}
+
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        $('.display').DataTable({
+            "searching": true,
+            "order": [[1, 'desc']],
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ de total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 de 0 de total de 0 registros",
+                "infoFiltered": "(filtrados de _MAX_)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostra _MENU_ entradas",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando",
+                "search": "Busca:",
+                "zeroRecords": "Nenhum registro encontrado",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

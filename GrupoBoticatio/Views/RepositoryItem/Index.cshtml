@@ -1,0 +1,73 @@
+﻿@using GrupoBoticario.Models;
+
+<table class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Linguagem</th>
+            <th>Nome</th>
+            <th>URL</th>
+            <th>Descrição</th>
+            <th>Privado</th>
+            <th>Estrelas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in ViewBag.Data)
+        {
+            <tr>
+                <td>@data.Id</td>
+                <td>@data.Language</td>
+                <td>@data.FullName</td>
+                <td>
+                    <a href="@data.HtmlUrl" target="_blank">
+                        <span aria-hidden="true">@data.HtmlUrl</span>
+                    </a>
+                </td>
+                <td>@data.Description</td>
+                <td>
+                    @if (@data.IsPrivate == 1)
+                    {
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg>
+                    }
+                    else
+                    {
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16">
+                            <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+                        </svg>
+                    }
+                </td>
+                <td>@data.StargazersCount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("table").DataTable({
+            "searching": true,
+            "paging": false,
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ de total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 de 0 de total de 0 registros",
+                "infoFiltered": "(filtrados de _MAX_)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostra _MENU_ entradas",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando",
+                "search": "Busca:",
+                "zeroRecords": "Nenhum registro encontrado",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+            }
+        });
+    });
+</script>

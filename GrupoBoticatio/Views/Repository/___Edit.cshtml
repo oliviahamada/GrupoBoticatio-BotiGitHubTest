@@ -1,0 +1,90 @@
+﻿@model GrupoBoticario.Models.RepositoryDetailModel;
+
+@{
+    //ViewData["Title"] = "Home Pagse";
+    ViewData["model"] = "Home Pagse";
+}
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item @(Model.page <= 1 ? "disabled" : "")" >
+            <a class="page-link" href="@Url.Action("Edit", "Repository", new {id = Model.language, page = Model.page-1} )" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @{
+            int c = 1;
+            while (c <= 10)
+            {
+                <li class="page-item @(Model.page == c ? "active" : "")">
+                    @Html.ActionLink(c.ToString(),"Edit","Repository",new {
+                                id = Model.language, page = c
+                            }, new { @class = "page-link" })
+                </li>
+                c++;
+            }
+
+        }
+        <li class="page-item @(Model.page >= 10 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("Edit", "Repository", new {id = Model.language, page = Model.page+1} )" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <li class="page-item @(Model.page <= 1 ? "disabled" : "")" >
+            <span class="page-link">Limitações</span>
+        </li>
+    </ul>
+</nav>
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>@Html.DisplayName(Model.language)</th>
+                <th>Estrelas</th>
+                <th>grupo</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var i in await @Model.repositoryItem)
+        {
+                <tr>
+                    <td>@i.full_name</td>
+                    <td>@i.stargazers_count</td>
+                    <td>Position</td>
+                </tr>
+            
+            }
+        </tbody>
+    </table>
+ 
+
+<script type="text/javascript" language="javascript">
+    
+    $(document).ready(function () {
+
+
+        $('table').DataTable({
+            "searching": true,
+            "order": [[1, 'desc']],
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ de total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 de 0 de total de 0 registros",
+                "infoFiltered": "(filtrados de _MAX_)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostra _MENU_ entradas",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando",
+                "search": "Busca:",
+                "zeroRecords": "Nenhum registro encontrado",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+       
+    </script>

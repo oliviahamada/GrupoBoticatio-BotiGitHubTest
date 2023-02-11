@@ -1,0 +1,96 @@
+﻿
+@{
+    //ViewData["Title"] = "Home Pagse";
+    ViewData["model"] = "Home Pagse";
+}
+
+    
+    <table id="languages" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Linguagem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*foreach (var i in await @Model)
+            {
+                <tr>
+                <td>
+                    @Html.ActionLink(i.full_name,"Index","RepositoryItem",new {
+                        language = i.language
+                }, null)
+                </td>
+                </tr>
+            }*@
+            
+        </tbody>
+    </table>
+
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*foreach (var i in await @Model)
+            {
+                <tr>
+                    <td>@i.full_name</td>
+                    <td>Position</td>
+                    <td>Office</td>
+                    <td>Age</td>
+                    <td>Start date</td>
+                    <td><a class="site-btn btn-inline small" href="#">site-btn btn-inline small</a></td>
+                </tr>
+            }*@
+            
+        </tbody>
+    </table>
+ 
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+    
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js"></script>
+<script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('table').DataTable({
+            "searching": true,
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ de total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 de 0 de total de 0 registros",
+                "infoFiltered": "(filtrados de _MAX_)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostra _MENU_ entradas",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando",
+                "search": "Busca:",
+                "zeroRecords": "Nenhum registro encontrado",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+            }
+        });
+    });
+       
+    </script>

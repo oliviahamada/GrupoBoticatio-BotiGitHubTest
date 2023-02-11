@@ -1,0 +1,62 @@
+﻿@model Task<List<string>>;
+
+@{
+    //ViewData["Title"] = "Home Pagse";
+    ViewData["model"] = "Home Pagse";
+}
+
+    <table id="languages" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Linguagem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var language in await @Model)
+            {
+                <tr>
+                <td>
+                    @Html.ActionLink(language,"Edit","Repository",new {
+                        id = language, page = "1"
+                    })
+                </td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js"></script>
+<script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('table').DataTable({
+            "searching": true,
+            "paging": false,
+            "language": {
+                "emptyTable": "Nenhum registro encontrado",
+                "info": "Mostrando _START_ de _END_ de total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando 0 de 0 de total de 0 registros",
+                "infoFiltered": "(filtrados de _MAX_)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostra _MENU_ entradas",
+                "loadingRecords": "Carregando...",
+                "processing": "Processando",
+                "search": "Busca:",
+                "zeroRecords": "Nenhum registro encontrado",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+            }
+        });
+    });
+       
+    </script>

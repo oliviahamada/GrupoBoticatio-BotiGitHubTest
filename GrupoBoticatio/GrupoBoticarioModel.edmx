@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="grupoboticarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RepositoriesItemsDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RepositoryId" />
+            <PropertyRef Name="Language" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RepositoryId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="HtmlUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="IsPrivate" Type="smallint" Nullable="false" />
+          <Property Name="StargazersCount" Type="int" Nullable="false" />
+          <Property Name="Page" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RepositoriesLanguages">
+          <Key>
+            <PropertyRef Name="Language" />
+          </Key>
+          <Property Name="Language" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RepositoriesItemsDetails_Language">
+          <End Role="RepositoriesLanguages" Type="Self.RepositoriesLanguages" Multiplicity="1" />
+          <End Role="RepositoriesItemsDetails" Type="Self.RepositoriesItemsDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepositoriesLanguages">
+              <PropertyRef Name="Language" />
+            </Principal>
+            <Dependent Role="RepositoriesItemsDetails">
+              <PropertyRef Name="Language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="grupoboticarioModelStoreContainer">
+          <EntitySet Name="RepositoriesItemsDetails" EntityType="Self.RepositoriesItemsDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepositoriesLanguages" EntityType="Self.RepositoriesLanguages" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_RepositoriesItemsDetails_Language" Association="Self.FK_RepositoriesItemsDetails_Language">
+            <End Role="RepositoriesLanguages" EntitySet="RepositoriesLanguages" />
+            <End Role="RepositoriesItemsDetails" EntitySet="RepositoriesItemsDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="grupoboticarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RepositoriesItemsDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="RepositoryId" />
+            <PropertyRef Name="Language" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RepositoryId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HtmlUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsPrivate" Type="Int16" Nullable="false" />
+          <Property Name="StargazersCount" Type="Int32" Nullable="false" />
+          <Property Name="Page" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RepositoriesLanguages" Relationship="Self.FK_RepositoriesItemsDetails_Language" FromRole="RepositoriesItemsDetails" ToRole="RepositoriesLanguages" />
+        </EntityType>
+        <EntityType Name="RepositoriesLanguages">
+          <Key>
+            <PropertyRef Name="Language" />
+          </Key>
+          <Property Name="Language" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RepositoriesItemsDetails" Relationship="Self.FK_RepositoriesItemsDetails_Language" FromRole="RepositoriesLanguages" ToRole="RepositoriesItemsDetails" />
+        </EntityType>
+        <Association Name="FK_RepositoriesItemsDetails_Language">
+          <End Role="RepositoriesLanguages" Type="Self.RepositoriesLanguages" Multiplicity="1" />
+          <End Role="RepositoriesItemsDetails" Type="Self.RepositoriesItemsDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepositoriesLanguages">
+              <PropertyRef Name="Language" />
+            </Principal>
+            <Dependent Role="RepositoriesItemsDetails">
+              <PropertyRef Name="Language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="grupoboticarioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RepositoriesItemsDetails" EntityType="Self.RepositoriesItemsDetails" />
+          <EntitySet Name="RepositoriesLanguages" EntityType="Self.RepositoriesLanguages" />
+          <AssociationSet Name="FK_RepositoriesItemsDetails_Language" Association="Self.FK_RepositoriesItemsDetails_Language">
+            <End Role="RepositoriesLanguages" EntitySet="RepositoriesLanguages" />
+            <End Role="RepositoriesItemsDetails" EntitySet="RepositoriesItemsDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="grupoboticarioModelStoreContainer" CdmEntityContainer="grupoboticarioEntities">
+          <EntitySetMapping Name="RepositoriesItemsDetails">
+            <EntityTypeMapping TypeName="grupoboticarioModel.RepositoriesItemsDetails">
+              <MappingFragment StoreEntitySet="RepositoriesItemsDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RepositoryId" ColumnName="RepositoryId" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="HtmlUrl" ColumnName="HtmlUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="StargazersCount" ColumnName="StargazersCount" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepositoriesLanguages">
+            <EntityTypeMapping TypeName="grupoboticarioModel.RepositoriesLanguages">
+              <MappingFragment StoreEntitySet="RepositoriesLanguages">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -54,7 +54,7 @@ O banco de dados utilizado foi o SQL Server com integrado ao Microsoft Azure. O 
 A listas das cinco linguagens utilizadas para o filtro estão inseridas na tabela `RepositoriesLanguages`.
 
 > **Warning**: *Os arquivos de configurações foram alterados. Será necessário alterar as seguintes informações: {ServerAddress} / {InitialCatalog} / {AdminUser} / {Password}. Arquivos: `Web.config` e `app.config`.*
-</br>
+
 
 *******
 
@@ -74,8 +74,7 @@ Update-Database
 ```
 
 Estes comandos permitem criar estruturas de tabelas que foram adicionadas ao modelo. [Migrações do Code First](https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/migrations/)
-</br>
-</br>
+
 *******
 
 <div id='execution'/>
@@ -85,8 +84,6 @@ Estes comandos permitem criar estruturas de tabelas que foram adicionadas ao mod
 A tela principal apresenta a lista das 5 linguagens inseridas na tabela. Selecionando o link no nome da linguagem, a aplicação faz a requisição dos repositórios, e assim que retornar os dados, os menos são inseridos na tabela `RepositoriesItemsDetails`. Para mostrar o detalhe será necessário selecionar o link no nome do respositório, e a aplicação irá fazer essa consulta no banco de dados.
 
 > **Warning**: Por se tratar de uma grande volumetria de dados, a aplicação faz `TRUNCATE` na tabela antes de gravar os registros, assim armazendo apenas o resultado da última requisição.
-</br>
-</br>
 
 *******
 
